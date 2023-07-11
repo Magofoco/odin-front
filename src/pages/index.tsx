@@ -10,11 +10,18 @@ export default function Home() {
     setIsModalProfileOpen(true)
   }
 
+  const handleSuccessSubmit = () => {
+    setIsModalProfileOpen(false)
+  }
+
   return (
     <HStack justifyContent="center" height="100vh">
       <Heading as="h1" fontSize="3xl">
         <Button onClick={() => handleClickEdit()}>Edit</Button>
-        <ProfileContainer isModalOpen={isModalProfileOpen} />
+        <ProfileContainer
+          isModalOpen={isModalProfileOpen}
+          onSuccessSubmit={handleSuccessSubmit}
+        />
       </Heading>
     </HStack>
   )

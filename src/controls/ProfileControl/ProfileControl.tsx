@@ -16,12 +16,14 @@ import {
   GridItem,
   Textarea,
   FormErrorMessage,
+  Text,
 } from "@chakra-ui/react"
 
 interface ProfileControlProps {
   isModalOpen: boolean
   nameError: string
   usernameError: string
+  submitError: string
   onNameChange: (e: ChangeEvent<HTMLInputElement>) => void
   onUsernameChange: (e: ChangeEvent<HTMLInputElement>) => void
   onBioChange: (e: ChangeEvent<HTMLTextAreaElement>) => void
@@ -32,13 +34,14 @@ const ProfileControl = ({
   isModalOpen,
   nameError,
   usernameError,
+  submitError,
   onNameChange,
   onUsernameChange,
   onBioChange,
   onClickSave,
 }: ProfileControlProps) => {
   return (
-    <Modal isOpen={isModalOpen} onClose={() => console.log("Modal closed")}>
+    <Modal isOpen={isModalOpen} onClose={() => undefined}>
       <ModalOverlay />
       <ModalContent>
         <ModalHeader>
@@ -52,7 +55,7 @@ const ProfileControl = ({
             </GridItem>
             <GridItem>
               <Button size="sm" variant="outline">
-                Update New
+                Updload new
               </Button>
             </GridItem>
           </Grid>
@@ -89,9 +92,16 @@ const ProfileControl = ({
           </VStack>
         </ModalBody>
         <ModalFooter>
-          <Button colorScheme="blue" mr={3} onClick={onClickSave}>
-            Save
-          </Button>
+          <VStack spacing={2}>
+            <Button colorScheme="blue" mr={3} onClick={onClickSave}>
+              Save
+            </Button>
+            {submitError && (
+              <Grid>
+                <Text color="red">{submitError}</Text>
+              </Grid>
+            )}
+          </VStack>
         </ModalFooter>
       </ModalContent>
     </Modal>

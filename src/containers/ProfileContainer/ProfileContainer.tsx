@@ -2,15 +2,17 @@ import { ProfileControl } from "@/controls/ProfileControl"
 import { ChangeEvent, useState } from "react"
 interface ProfileContainerProps {
   isModalOpen: boolean
+  onSuccessSubmit: () => void
 }
 
 const ProfileContainer = (props: ProfileContainerProps) => {
-  const { isModalOpen } = props
+  const { isModalOpen, onSuccessSubmit } = props
   const [name, setName] = useState<string | undefined>(undefined)
   const [username, setUsername] = useState<string | undefined>(undefined)
   const [bio, setBio] = useState<string | undefined>(undefined)
   const [nameError, setNameError] = useState<string>("")
   const [usernameError, setUsernameError] = useState<string>("")
+  const [submitError, setSubmitError] = useState<string>("")
 
   const handleNameChange = (e: ChangeEvent<HTMLInputElement>) => {
     const name = e.target.value
@@ -27,7 +29,7 @@ const ProfileContainer = (props: ProfileContainerProps) => {
     setBio(bio)
   }
 
-  const handleClickSave = () => {
+  const handleClickSave = async () => {
     // Perform form submission or validation here
     if (!name) {
       setNameError("Display Name is required")
@@ -44,7 +46,30 @@ const ProfileContainer = (props: ProfileContainerProps) => {
     }
 
     if (!nameError && !usernameError) {
-      console.log("ciao")
+      const data = {
+        name,
+        username,
+        bio,
+      }
+
+      try {
+        const response = await fetch("http://localhost:8000/profile", {
+          method: "PATCH",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(data),
+        })
+
+        if (response.ok) {
+          console.log("Profile updated successfully")
+          onSuccessSubmit()
+        } else {
+          setSubmitError("Something went wrong, try again!")
+        }
+      } catch (error) {
+        console.log("An error occurred", error)
+      }
     }
   }
 
@@ -53,6 +78,7 @@ const ProfileContainer = (props: ProfileContainerProps) => {
       isModalOpen={isModalOpen}
       nameError={nameError}
       usernameError={usernameError}
+      submitError={submitError}
       onNameChange={handleNameChange}
       onUsernameChange={handleUsernameChange}
       onBioChange={handleBioChange}

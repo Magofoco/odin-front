@@ -1,8 +1,8 @@
 {
   "profile": {
     "display_name": "Shad Jahangir",
-    "username": "shad",
-    "bio": "Good for health, bad for education. Focusing my personal investments in the Pakistani startup scene. Day-to-day designing Odin.",
+    "username": "tete",
+    "bio": "dgsgs",
     "syndicates": [
       {
         "id": "synd-1",
@@ -29,6 +29,7 @@
         "date": "2020",
         "status": "Series A"
       }
-    ]
+    ],
+    "name": "tre"
   }
 }
