@@ -30,7 +30,6 @@ const ProfileContainer = (props: ProfileContainerProps) => {
   }
 
   const handleClickSave = async () => {
-    // Perform form submission or validation here
     if (!name) {
       setNameError("Display Name is required")
     } else {

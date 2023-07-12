@@ -26,7 +26,7 @@ describe("ProfileContainer", () => {
     const saveButton = screen.getByText("Save")
 
     fireEvent.change(nameInput, { target: { value: "Fake User" } })
-    fireEvent.change(usernameInput, { target: { value: "fakeuser" } })
+    fireEvent.change(usernameInput, { target: { value: "fakeuser@@" } })
     fireEvent.click(saveButton)
 
     await waitFor(() => {
