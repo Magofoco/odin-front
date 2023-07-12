@@ -68,6 +68,7 @@ const ProfileControl = ({
                 id="displayName"
                 placeholder="Enter your name"
                 onChange={onNameChange}
+                data-testid="display-name-input"
               />
               <FormErrorMessage>{nameError}</FormErrorMessage>
             </FormControl>
@@ -77,6 +78,7 @@ const ProfileControl = ({
                 id="username"
                 placeholder="Enter your username"
                 onChange={onUsernameChange}
+                data-testid="username-input"
               />
               <FormErrorMessage>{usernameError}</FormErrorMessage>
             </FormControl>
